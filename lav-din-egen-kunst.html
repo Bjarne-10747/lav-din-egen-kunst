@@ -2,14 +2,25 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Lissajous Curve</title>
+        <title> Kunst Version 3</title>
     </head>
     <body>
         <canvas id="koordinatsystem" width="1001" height="1001" style="border:2px solid #000000;"></canvas>
+
+        <div class="RangeSliderContainer">
+          <input id="xaInput" type="range" min="1" max="15" value="5" step="1">
+          <button onclick="skrivxa()">Vis xa</button>
+          <p id="showxa">Placeholder</p>
+        </div>
+
     </body>
 </html>
 
 <script>
+  function skrivxa() {
+    var xa = document.getElementById("xaInput").value;
+    document.getElementById("showxa").innerHTML = xa;
+
     var canvas = document.getElementById("koordinatsystem");
     var ctx = canvas.getContext("2d");
     var pixelNo = 0; // Pixelnummer startende med 0 i øverste venstre hjørne af koordinatsystemet
@@ -22,19 +33,25 @@
     var lissajousIDO = ctx.createImageData (width, height);
 
     for (i=1; i<=iterations; i++) {
-        a=i/iterations*2*Math.PI;
+      a=i/iterations*2*Math.PI;
 
+<<<<<<< Updated upstream
         x = Math.cos(a);
         y = Math.sin(a);
+=======
+      x = Math.cos(xa*a)*Math.cos(4*a);
+      y = Math.sin(3*a)*Math.sin(2*a);
+>>>>>>> Stashed changes
 
-        pixelsFraVenstre = inddelinger/2 + Math.floor(inddelinger*x/2.02+0.5);
-        pixelsFraTop = inddelinger/2 - Math.floor(inddelinger*y/2.02+0.5);
+      pixelsFraVenstre = inddelinger/2 + Math.floor(inddelinger*x/2.02+0.5);
+      pixelsFraTop = inddelinger/2 - Math.floor(inddelinger*y/2.02+0.5);
 
-        pixelNo = pixelsFraVenstre + pixelsFraTop*width;
-        lissajousIDO.data[pixelNo*4 + 0] = 0;
-        lissajousIDO.data[pixelNo*4 + 1] = 0;
-        lissajousIDO.data[pixelNo*4 + 2] = 0;
-        lissajousIDO.data[pixelNo*4 + 3] = 255;
+      pixelNo = pixelsFraVenstre + pixelsFraTop*width;
+      lissajousIDO.data[pixelNo*4 + 0] = 0;
+      lissajousIDO.data[pixelNo*4 + 1] = 0;
+      lissajousIDO.data[pixelNo*4 + 2] = 0;
+      lissajousIDO.data[pixelNo*4 + 3] = 255;
     }
-ctx.putImageData(lissajousIDO,0,0);
+    ctx.putImageData(lissajousIDO,0,0);
+  }
 </script>
