@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Lissajous Curve</title>
+    </head>
+    <body>
+        <canvas id="koordinatsystem" width="1001" height="1001" style="border:2px solid #000000;"></canvas>
+    </body>
+</html>
+
+<script>
+    var canvas = document.getElementById("koordinatsystem");
+    var ctx = canvas.getContext("2d");
+    var pixelNo = 0; // Pixelnummer startende med 0 i øverste venstre hjørne af koordinatsystemet
+    var pixelsFraVenstre = 0; // Det afsatte punkts afstand i pixels fra venstre kant i koordinatsystemet
+    var pixelsFraTop = 0; // Det afsatte punkts afstand i pixels fra øverste kant i koordinatsystemet
+    var iterations = 100000;  // Antallet af punkter som afsættes i koordinatsystemet
+    var inddelinger = 1000;  // Antallet af inddelinger af x- og y-aksen (skal være et lige tal)
+    var width = inddelinger+1;  // koordinatsystemets bredde i pixels
+    var height = inddelinger+1;  // koordinatsystemets højde i pixels
+    var lissajousIDO = ctx.createImageData (width, height);
+
+    for (i=1; i<=iterations; i++) {
+        a=i/iterations*2*Math.PI;
+
+        x = Math.cos(a);
+        y = Math.sin(a);
+
+        pixelsFraVenstre = inddelinger/2 + Math.floor(inddelinger*x/2.02+0.5);
+        pixelsFraTop = inddelinger/2 - Math.floor(inddelinger*y/2.02+0.5);
+
+        pixelNo = pixelsFraVenstre + pixelsFraTop*width;
+        lissajousIDO.data[pixelNo*4 + 0] = 0;
+        lissajousIDO.data[pixelNo*4 + 1] = 0;
+        lissajousIDO.data[pixelNo*4 + 2] = 0;
+        lissajousIDO.data[pixelNo*4 + 3] = 255;
+    }
+ctx.putImageData(lissajousIDO,0,0);
+</script>
