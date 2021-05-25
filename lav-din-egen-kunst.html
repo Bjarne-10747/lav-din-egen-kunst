@@ -24,8 +24,8 @@
     for (i=1; i<=iterations; i++) {
         a=i/iterations*2*Math.PI;
 
-        x = Math.cos(a);
-        y = Math.sin(a);
+        x = Math.cos(6*a)*Math.cos(4*a);
+        y = Math.sin(3*a)*Math.sin(2*a);
 
         pixelsFraVenstre = inddelinger/2 + Math.floor(inddelinger*x/2.02+0.5);
         pixelsFraTop = inddelinger/2 - Math.floor(inddelinger*y/2.02+0.5);
