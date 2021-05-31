@@ -13,6 +13,8 @@
 
           canvas {
             background-color: #ffb91e;
+            width: 100%;
+            height: 100%;
           }
           h1 {
             text-align: center;
@@ -20,7 +22,7 @@
             font-size: 4em;
           }
           #c1Input, #c2Input, #c3Input {
-            width: 20%;
+            width: 80%;
             font-family: Philosopher;
             font-size: 2em;
           }
@@ -31,7 +33,7 @@
             background-color: #888888;
           }
           .canvasContainer {
-              grid-area: can;
+            grid-area: can;
             padding: 0px;
             margin: 0px;
           }
@@ -51,9 +53,21 @@
             padding: 10px;
           }
           .parameterContainer {
-            grid-area: p;
+            grid-area: par;
             background-color: #bbbbbb;
+            padding: 10px;
           }
+
+            .artCreatorGrid {
+              display: grid;
+              grid-template-columns: 1fr 1fr 1fr 1fr;
+              grid-template-areas:
+              "over over over over"
+              "can can can c1"
+              "can can can c2"
+              "can can can c3"
+              "can can can par";
+            }
 
         </style>
 
