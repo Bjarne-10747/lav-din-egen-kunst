@@ -2,22 +2,29 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title> Kunst 7</title>
+        <title> Kunst 8</title>
     </head>
     <body onload="opdaterGraf()">
         <canvas id="koordinatsystem" width="1001" height="1001" style="border:2px solid #000000;"></canvas>
 
         <div class="RangeSliderContainer">
-          <input id="xaInput" type="range" min="1" max="16" value="7" step="1" oninput="opdaterGraf()">
-          <input id="xbInput" type="range" min="1" max="16" value="8" step="1" oninput="opdaterGraf()">
-          <input id="yaInput" type="range" min="1" max="16" value="9" step="1" oninput="opdaterGraf()">
-          <input id="ybInput" type="range" min="1" max="16" value="10" step="1" oninput="opdaterGraf()">
+          <label for="xaInput">xa</label>
+          <input id="xaInput" type="range" min="1" max="16" value="7" step="1" oninput="opdaterGraf()"><br>
+          <label for="xbInput">xb</label>
+          <input id="xbInput" type="range" min="1" max="16" value="8" step="1" oninput="opdaterGraf()"><br>
+          <label for="yaInput">ya</label>
+          <input id="yaInput" type="range" min="1" max="16" value="9" step="1" oninput="opdaterGraf()"><br>
+          <label for="ybInput">yb</label>
+          <input id="ybInput" type="range" min="1" max="16" value="10" step="1" oninput="opdaterGraf()"><br>
+          <label for="cInput">c</label>
+          <input id="cInput" type="range" min="1" max="100" value="0" step="1" oninput="opdaterGraf()">
         </div>
 
           <p id="visxa">xa =</p>
           <p id="visxb">xb =</p>
           <p id="visya">ya =</p>
           <p id="visyb">yb =</p>
+          <p id="visc">c =</p>
 
     </body>
 </html>
@@ -28,11 +35,14 @@
     var xb = document.getElementById("xbInput").value;
     var ya = document.getElementById("yaInput").value;
     var yb = document.getElementById("ybInput").value;
+    var c = document.getElementById("cInput").value;
 
     document.getElementById("visxa").innerHTML = "xa = " + xa;
     document.getElementById("visxb").innerHTML = "xb = " + xb;
     document.getElementById("visya").innerHTML = "ya = " + ya;
     document.getElementById("visyb").innerHTML = "yb = " + yb;
+    document.getElementById("visc").innerHTML = "c = " + c;
+
 
     var canvas = document.getElementById("koordinatsystem");
     var ctx = canvas.getContext("2d");
