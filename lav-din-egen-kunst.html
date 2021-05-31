@@ -165,6 +165,9 @@
     var x = 0;
     var y = 0;
     var a = 0;
+    var dxy = 2 * (r1a+r2a+r3a);
+    var xmin = x1-r1a+x2-r2a+x3-r3a;
+    var ymin = y1-r1a+y2-r2a+y3-r3a;
 
     for (i=1; i<=iterations; i++){
         a=i/iterations*2*Math.PI;
@@ -178,8 +181,11 @@
         x3a = x3 + Math.cos(c3*a)*r3a;
         y3a = y3 + Math.sin(c3*a)*r3a;
 
-        x = (x1a+x2a+x3a)/3;
-        y = (y1a+y2a+y3a)/3;
+        x = (x1a+x2a+x3a)/dxy*2 - xmin*2/dxy-1;
+        y = (y1a+y2a+y3a)/dxy*2 - ymin*2/dxy-1;
+
+      //  x = x/20;
+      //  y = y/20;
 
       pixelsFraVenstre = inddelinger/2 + Math.floor(inddelinger*x/2.1+0.5);
       pixelsFraTop = inddelinger/2 - Math.floor(inddelinger*y/2.1+0.5);
