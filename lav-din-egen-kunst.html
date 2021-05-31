@@ -2,28 +2,23 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title> Kunst 4</title>
+        <title> Kunst 5</title>
     </head>
     <body>
         <canvas id="koordinatsystem" width="1001" height="1001" style="border:2px solid #000000;"></canvas>
 
         <div class="RangeSliderContainer">
-
           <input id="xaInput" type="range" min="1" max="15" value="1" step="1">
-          <button onclick="opdaterGraf()">Opdater xa</button>
-
           <input id="xbInput" type="range" min="1" max="15" value="1" step="1">
-          <button onclick="opdaterGraf()">Opdater xb</button>
-
           <input id="yaInput" type="range" min="1" max="15" value="1" step="1">
-          <button onclick="opdaterGraf()">Opdater ya</button>
-
           <input id="ybInput" type="range" min="1" max="15" value="1" step="1">
-          <button onclick="opdaterGraf()">Opdater yb</button>
-
         </div>
 
-          <p id="visVariabler">Placeholder</p>
+          <p id="visxa">xa =</p>
+          <p id="visxb">xb =</p>
+          <p id="visya">ya =</p>
+          <p id="visyb">yb =</p>
+
           <button onclick="opdaterGraf()">Opdater grafen</button>
 
     </body>
@@ -36,7 +31,10 @@
     var ya = document.getElementById("yaInput").value;
     var yb = document.getElementById("ybInput").value;
 
-    document.getElementById("visVariabler").innerHTML = "xa = " + xa; + "<br>" + "xb = "; // + xb + "<br>" + "ya = " + ya + "<br>" + "yb = " + yb + "<br>";
+    document.getElementById("visxa").innerHTML = "xa = " + xa;
+    document.getElementById("visxb").innerHTML = "xb = " + xb;
+    document.getElementById("visya").innerHTML = "ya = " + ya;
+    document.getElementById("visyb").innerHTML = "yb = " + yb;
 
     var canvas = document.getElementById("koordinatsystem");
     var ctx = canvas.getContext("2d");
