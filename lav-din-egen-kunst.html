@@ -2,14 +2,42 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Lissajous Curve</title>
+        <title> Kunst 4</title>
     </head>
     <body>
         <canvas id="koordinatsystem" width="1001" height="1001" style="border:2px solid #000000;"></canvas>
+
+        <div class="RangeSliderContainer">
+
+          <input id="xaInput" type="range" min="1" max="15" value="1" step="1">
+          <button onclick="opdaterGraf()">Opdater xa</button>
+
+          <input id="xbInput" type="range" min="1" max="15" value="1" step="1">
+          <button onclick="opdaterGraf()">Opdater xb</button>
+
+          <input id="yaInput" type="range" min="1" max="15" value="1" step="1">
+          <button onclick="opdaterGraf()">Opdater ya</button>
+
+          <input id="ybInput" type="range" min="1" max="15" value="1" step="1">
+          <button onclick="opdaterGraf()">Opdater yb</button>
+
+        </div>
+
+          <p id="visVariabler">Placeholder</p>
+          <button onclick="opdaterGraf()">Opdater grafen</button>
+
     </body>
 </html>
 
 <script>
+  function opdaterGraf() {
+    var xa = document.getElementById("xaInput").value;
+    var xb = document.getElementById("xbInput").value;
+    var ya = document.getElementById("yaInput").value;
+    var yb = document.getElementById("ybInput").value;
+
+    document.getElementById("visVariabler").innerHTML = "xa = " + xa; + "<br>" + "xb = "; // + xb + "<br>" + "ya = " + ya + "<br>" + "yb = " + yb + "<br>";
+
     var canvas = document.getElementById("koordinatsystem");
     var ctx = canvas.getContext("2d");
     var pixelNo = 0; // Pixelnummer startende med 0 i øverste venstre hjørne af koordinatsystemet
@@ -22,19 +50,20 @@
     var lissajousIDO = ctx.createImageData (width, height);
 
     for (i=1; i<=iterations; i++) {
-        a=i/iterations*2*Math.PI;
+      a=i/iterations*2*Math.PI;
 
-        x = Math.cos(a);
-        y = Math.sin(a);
+      x = Math.cos(xa*a)*Math.cos(xb*a);
+      y = Math.sin(ya*a)*Math.sin(yb*a);
 
-        pixelsFraVenstre = inddelinger/2 + Math.floor(inddelinger*x/2.02+0.5);
-        pixelsFraTop = inddelinger/2 - Math.floor(inddelinger*y/2.02+0.5);
+      pixelsFraVenstre = inddelinger/2 + Math.floor(inddelinger*x/2.02+0.5);
+      pixelsFraTop = inddelinger/2 - Math.floor(inddelinger*y/2.02+0.5);
 
-        pixelNo = pixelsFraVenstre + pixelsFraTop*width;
-        lissajousIDO.data[pixelNo*4 + 0] = 0;
-        lissajousIDO.data[pixelNo*4 + 1] = 0;
-        lissajousIDO.data[pixelNo*4 + 2] = 0;
-        lissajousIDO.data[pixelNo*4 + 3] = 255;
+      pixelNo = pixelsFraVenstre + pixelsFraTop*width;
+      lissajousIDO.data[pixelNo*4 + 0] = 0;
+      lissajousIDO.data[pixelNo*4 + 1] = 0;
+      lissajousIDO.data[pixelNo*4 + 2] = 0;
+      lissajousIDO.data[pixelNo*4 + 3] = 255;
     }
-ctx.putImageData(lissajousIDO,0,0);
+    ctx.putImageData(lissajousIDO,0,0);
+  }
 </script>
