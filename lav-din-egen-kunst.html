@@ -35,7 +35,7 @@
           #c1Input, #c2Input, #c3Input {
             width: 80%;
             font-family: Philosopher;
-            font-size: 2em;
+            font-size: 26px;
           }
           .overskriftContainer {
             grid-area: over;
@@ -50,6 +50,7 @@
           }
           .info1Container {
             grid-area: inf1;
+            background-color: #345678;
             padding: 20px;
             margin: 0px;
           }
@@ -58,14 +59,9 @@
             background-color: #ccb91e;
             padding: 20px;
           }
-          .parameterContainer {
-            grid-area: par;
-            background-color: #bbbbbb;
-            padding: 20px;
-          }
           .info2Container {
             grid-area: inf2;
-            background-color: #ccb91e;
+            background-color: #345678;
             padding: 20px;
             margin: 0px;
           }
@@ -76,8 +72,7 @@
               "over over over over"
               "can can can inf1"
               "can can can sli"
-              "can can can par"
-              "inf2 inf2 inf2 inf2";
+              "can can can inf2";
             }
 
         </style>
@@ -100,23 +95,17 @@
         </div>
 
         <div class="sliderContainer">
-          <label for="c1Input">c1</label>
-          <input id="c1Input" type="range" min="1" max="100" value="15" step="1" oninput="opdaterGraf()"><br>
-          <label for="c2Input">c2</label>
-          <input id="c2Input" type="range" min="1" max="100" value="91" step="1" oninput="opdaterGraf()"><br>
-          <label for="c3Input">c3</label>
-          <input id="c3Input" type="range" min="1" max="100" value="30" step="1" oninput="opdaterGraf()"><br>
+          <input id="c1Input" type="range" min="1" max="100" value="1" step="1" oninput="opdaterGraf()">
+          <p id="visc1">c1 =</p>
+          <input id="c2Input" type="range" min="1" max="100" value="1" step="1" oninput="opdaterGraf()">
+          <p id="visc2">c2 =</p>
+          <input id="c3Input" type="range" min="1" max="100" value="1" step="1" oninput="opdaterGraf()">
+          <p id="visc3">c3 =</p>
         </div>
 
         <div class="info2Container">
           <h2>Gode råd</h2>
-          <p>Brug evt. tabulator-tasten til at skifte mellem markering af de tre forskellige skydere. Og brug herefter piletasterne til ændre på værdien af c1, c2 henholdsvis c3. Hvis man starter med små værdier af de tre parametre, er det lettest at kreere kunst.</p>
-        </div>
-
-        <div class="parameterContainer">
-          <p id="visc1">c1 =</p>
-          <p id="visc2">c2 =</p>
-          <p id="visc3">c3 =</p>
+          <p>Brug evt. tabulator-tasten til at skifte mellem markering af de tre forskellige skydere. Og brug herefter piletasterne til ændre på værdien af den markerede skyder.</p>
         </div>
 
       </div>
@@ -148,13 +137,13 @@
 
 
 
-    var v1 = 0;
-    var r1 = 3;
-    var x1 = Math.cos(v1)*r1;
-    var y1 = Math.sin(v1)*r1;
-    var r1a = 1;
-    var x1a = 0;
-    var y1a = 0;
+    var v1 = 0;   // Cirkel 1: Vinklen mellem x-aksen og origo-centrum-linien
+    var r1 = 3;   // Cirkel 1: Afstand mellem origo og cirklens centrum
+    var x1 = Math.cos(v1)*r1;   // Cirkel 1: x-koordinaten for centrum
+    var y1 = Math.sin(v1)*r1;   // Cirkel 1: y-koordinaten for centrum
+    var r1a = 1;   // Cirkel 1: Cirklens radius
+    var x1a = 0;   // Cirkel 1: x-koordinaten for det aktuelle punkt på cirklen (funktion af a)
+    var y1a = 0;   // Cirkel 1: y-koordinaten for det aktuelle punkt på cirklen (funktion af a)
 
     var v2 = 2/3*Math.PI;
     var r2 = 3;
