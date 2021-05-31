@@ -2,50 +2,41 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title> Kunst 8</title>
+        <title>Art Creator 2</title>
     </head>
     <body onload="opdaterGraf()">
-        <canvas id="koordinatsystem" width="1001" height="1001" style="border:2px solid #000000;"></canvas>
+      <h1>Art Creator 2</h1>
+      <canvas id="koordinatsystem" width="1001" height="1001" style="border:2px solid #000000;"></canvas>
 
-        <div class="RangeSliderContainer">
-          <label for="xaInput">xa</label>
-          <input id="xaInput" type="range" min="1" max="16" value="7" step="1" oninput="opdaterGraf()"><br>
-          <label for="xbInput">xb</label>
-          <input id="xbInput" type="range" min="1" max="16" value="8" step="1" oninput="opdaterGraf()"><br>
-          <label for="yaInput">ya</label>
-          <input id="yaInput" type="range" min="1" max="16" value="9" step="1" oninput="opdaterGraf()"><br>
-          <label for="ybInput">yb</label>
-          <input id="ybInput" type="range" min="1" max="16" value="10" step="1" oninput="opdaterGraf()"><br>
-          <label for="cInput">c</label>
-          <input id="cInput" type="range" min="1" max="100" value="0" step="1" oninput="opdaterGraf()">
-        </div>
+      <div class="RangeSliderContainer">
+        <label for="c1Input">c1</label>
+        <input id="c1Input" type="range" min="1" max="16" value="1" step="1" oninput="opdaterGraf()">
 
-          <p id="visxa">xa =</p>
-          <p id="visxb">xb =</p>
-          <p id="visya">ya =</p>
-          <p id="visyb">yb =</p>
-          <p id="visc">c =</p>
+        <label for="c2Input">c2</label>
+        <input id="c2Input" type="range" min="1" max="16" value="1" step="1" oninput="opdaterGraf()">
 
+        <label for="c3Input">c3</label>
+        <input id="c3Input" type="range" min="1" max="16" value="1" step="1" oninput="opdaterGraf()">
+      </div>
+      <p id="visc1">c1 =</p>
+      <p id="visc2">c2 =</p>
+      <p id="visc3">c3 =</p>
     </body>
 </html>
 
 <script>
   function opdaterGraf() {
-    var xa = document.getElementById("xaInput").value;
-    var xb = document.getElementById("xbInput").value;
-    var ya = document.getElementById("yaInput").value;
-    var yb = document.getElementById("ybInput").value;
-    var c = document.getElementById("cInput").value;
+    var c1 = document.getElementById("c1Input").value;
+    var c2 = document.getElementById("c2Input").value;
+    var c3 = document.getElementById("c3Input").value;
 
-    document.getElementById("visxa").innerHTML = "xa = " + xa;
-    document.getElementById("visxb").innerHTML = "xb = " + xb;
-    document.getElementById("visya").innerHTML = "ya = " + ya;
-    document.getElementById("visyb").innerHTML = "yb = " + yb;
-    document.getElementById("visc").innerHTML = "c = " + c;
-
+    document.getElementById("visc1").innerHTML = "c1 = " + c1;
+    document.getElementById("visc2").innerHTML = "c2 = " + c2;
+    document.getElementById("visc3").innerHTML = "c3 = " + c3;
 
     var canvas = document.getElementById("koordinatsystem");
     var ctx = canvas.getContext("2d");
+
     var pixelNo = 0; // Pixelnummer startende med 0 i øverste venstre hjørne af koordinatsystemet
     var pixelsFraVenstre = 0; // Det afsatte punkts afstand i pixels fra venstre kant i koordinatsystemet
     var pixelsFraTop = 0; // Det afsatte punkts afstand i pixels fra øverste kant i koordinatsystemet
@@ -55,14 +46,55 @@
     var height = inddelinger+1;  // koordinatsystemets højde i pixels
     var lissajousIDO = ctx.createImageData (width, height);
 
-    for (i=1; i<=iterations; i++) {
-      a=i/iterations*2*Math.PI;
 
-      x = Math.cos(xa*a)*Math.cos(xb*a);
-      y = Math.sin(ya*a)*Math.sin(yb*a);
 
-      pixelsFraVenstre = inddelinger/2 + Math.floor(inddelinger*x/2.02+0.5);
-      pixelsFraTop = inddelinger/2 - Math.floor(inddelinger*y/2.02+0.5);
+    var v1 = 0;
+    var r1 = 3;
+    var x1 = Math.cos(v1)*r1;
+    var y1 = Math.sin(v1)*r1;
+    var r1a = 1;
+    var x1a = 0;
+    var y1a = 0;
+
+    var v2 = 2/3*Math.PI;
+    var r2 = 3;
+    var x2 = Math.cos(v2)*r2;
+    var y2 = Math.sin(v2)*r2;
+    var r2a = 1;
+    var x2a = 0;
+    var y2a = 0;
+
+    var v3 = 4/3*Math.PI
+    var r3 = 3;
+    var x3 = Math.cos(v3)*r3;
+    var y3 = Math.sin(v3)*r3;
+    var r3a = 1;
+    var x3a = 0;
+    var y3a = 0;
+
+    var x = 0;
+    var y = 0;
+    var a = 0;
+
+    var xyMax = 1;
+
+    for (i=1; i<=5000; i++){
+        a=i/5000*2*Math.PI;
+
+        x1a = x1 + Math.cos(c1*a)*r1a;
+        y1a = y1 + Math.sin(c1*a)*r1a;
+
+        x2a = x2 + Math.cos(c2*a)*r2a;
+        y2a = y2 + Math.sin(c2*a)*r2a;
+
+        x3a = x3 + Math.cos(c3*a)*r3a;
+        y3a = y3 + Math.sin(c3*a)*r3a;
+
+        x = (x1a+x2a+x3a)/3/xyMax;
+        y = (y1a+y2a+y3a)/3/xyMax;
+
+      pixelsFraVenstre = inddelinger/2 + Math.floor(inddelinger*x/2.1+0.5);
+      pixelsFraTop = inddelinger/2 - Math.floor(inddelinger*y/2.1+0.5);
 
       pixelNo = pixelsFraVenstre + pixelsFraTop*width;
       lissajousIDO.data[pixelNo*4 + 0] = 0;
