@@ -3,24 +3,94 @@
     <head>
         <meta charset="utf-8">
         <title>Art Creator 2</title>
+
+        <style>   /* Internal CSS, sådan at kun denne HTML-fils indhold skal implementeres i WordPress */
+
+        body {
+          margin: 0px;
+          background-color: #aaaaaa;
+        }
+
+          canvas {
+            background-color: #ffb91e;
+          }
+          h1 {
+            text-align: center;
+            font-family: Philosopher;
+            font-size: 4em;
+          }
+          #c1Input, #c2Input, #c3Input {
+            width: 20%;
+            font-family: Philosopher;
+            font-size: 2em;
+          }
+          .overskriftContainer {
+            grid-area: over;
+            padding: 0px;
+            margin: 0px;
+            background-color: #888888;
+          }
+          .canvasContainer {
+              grid-area: can;
+            padding: 0px;
+            margin: 0px;
+          }
+          .c1SliderContainer{
+            grid-area: c1;
+            background-color: #ccb91e;
+            padding: 10px;
+          }
+          .c2SliderContainer{
+            grid-area: c2;
+            background-color: #ffb91e;
+            padding: 10px;
+          }
+          .c3SliderContainer{
+            grid-area: c3;
+            background-color: #ddb91e;
+            padding: 10px;
+          }
+          .parameterContainer {
+            grid-area: p;
+            background-color: #bbbbbb;
+          }
+
+        </style>
+
     </head>
     <body onload="opdaterGraf()">
-      <h1>Art Creator 2</h1>
-      <canvas id="koordinatsystem" width="1001" height="1001" style="border:2px solid #000000;"></canvas>
 
-      <div class="RangeSliderContainer">
-        <label for="c1Input">c1</label>
-        <input id="c1Input" type="range" min="1" max="16" value="1" step="1" oninput="opdaterGraf()">
+      <div class="artCreatorGrid">
 
-        <label for="c2Input">c2</label>
-        <input id="c2Input" type="range" min="1" max="16" value="1" step="1" oninput="opdaterGraf()">
+        <div class="overskriftContainer">
+          <h1>Art Creator 2</h1>
+        </div>
 
-        <label for="c3Input">c3</label>
-        <input id="c3Input" type="range" min="1" max="16" value="1" step="1" oninput="opdaterGraf()">
+        <div class="canvasContainer">
+          <canvas id="koordinatsystem" width="1001" height="1001"></canvas>
+        </div>
+
+        <div class="c1SliderContainer">
+          <label for="c1Input">c1</label>
+          <input id="c1Input" type="range" min="1" max="100" value="1" step="1" oninput="opdaterGraf()">
+        </div>
+
+        <div class="c2SliderContainer">
+          <label for="c2Input">c2</label>
+          <input id="c2Input" type="range" min="1" max="100" value="1" step="1" oninput="opdaterGraf()">
+        </div>
+
+        <div class="c3SliderContainer">
+          <label for="c3Input">c3</label>
+          <input id="c3Input" type="range" min="1" max="100" value="1" step="1" oninput="opdaterGraf()">
+        </div>
+
+        <div class="parameterContainer">
+          <p id="visc1">c1 =</p>
+          <p id="visc2">c2 =</p>
+          <p id="visc3">c3 =</p>
+        </div>
       </div>
-      <p id="visc1">c1 =</p>
-      <p id="visc2">c2 =</p>
-      <p id="visc3">c3 =</p>
     </body>
 </html>
 
@@ -38,9 +108,9 @@
     var ctx = canvas.getContext("2d");
 
     var pixelNo = 0; // Pixelnummer startende med 0 i øverste venstre hjørne af koordinatsystemet
-    var pixelsFraVenstre = 0; // Det afsatte punkts afstand i pixels fra venstre kant i koordinatsystemet
-    var pixelsFraTop = 0; // Det afsatte punkts afstand i pixels fra øverste kant i koordinatsystemet
-    var iterations = 40000;  // Antallet af punkter som afsættes i koordinatsystemet
+    var pixelsFraVenstre = 0; // Den aktuelle pixels nummer fra venstre kant i koordinatsystemet
+    var pixelsFraTop = 0; // Den aktuelle pixels nummer fra øverste kant i koordinatsystemet
+    var iterations = 100000;  // Antallet af punkter som afsættes i koordinatsystemet
     var inddelinger = 1000;  // Antallet af inddelinger af x- og y-aksen (skal være et lige tal)
     var width = inddelinger+1;  // koordinatsystemets bredde i pixels
     var height = inddelinger+1;  // koordinatsystemets højde i pixels
