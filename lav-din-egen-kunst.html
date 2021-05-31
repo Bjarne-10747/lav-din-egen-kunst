@@ -40,7 +40,7 @@
     var pixelNo = 0; // Pixelnummer startende med 0 i øverste venstre hjørne af koordinatsystemet
     var pixelsFraVenstre = 0; // Det afsatte punkts afstand i pixels fra venstre kant i koordinatsystemet
     var pixelsFraTop = 0; // Det afsatte punkts afstand i pixels fra øverste kant i koordinatsystemet
-    var iterations = 100000;  // Antallet af punkter som afsættes i koordinatsystemet
+    var iterations = 40000;  // Antallet af punkter som afsættes i koordinatsystemet
     var inddelinger = 1000;  // Antallet af inddelinger af x- og y-aksen (skal være et lige tal)
     var width = inddelinger+1;  // koordinatsystemets bredde i pixels
     var height = inddelinger+1;  // koordinatsystemets højde i pixels
@@ -78,8 +78,8 @@
 
     var xyMax = 1;
 
-    for (i=1; i<=5000; i++){
-        a=i/5000*2*Math.PI;
+    for (i=1; i<=iterations; i++){
+        a=i/iterations*2*Math.PI;
 
         x1a = x1 + Math.cos(c1*a)*r1a;
         y1a = y1 + Math.sin(c1*a)*r1a;
