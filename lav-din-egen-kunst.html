@@ -9,6 +9,7 @@
         body {
           margin: 0px;
           background-color: #aaaaaa;
+          line-height: 1.3;
         }
 
           canvas {
@@ -19,7 +20,17 @@
           h1 {
             text-align: center;
             font-family: Philosopher;
-            font-size: 4em;
+            font-size: 48px;
+          }
+          h2 {
+            text-align: left;
+            font-family: Philosopher;
+            font-size: 20px;
+          }
+          p {
+            text-align: left;
+            font-family: Philosopher;
+            font-size: 16px;
           }
           #c1Input, #c2Input, #c3Input {
             width: 80%;
@@ -37,40 +48,39 @@
             padding: 0px;
             margin: 0px;
           }
-          .c1SliderContainer{
-            grid-area: c1;
+          .info1Container {
+            grid-area: inf1;
+            padding: 20px;
+            margin: 0px;
+          }
+          .sliderContainer{
+            grid-area: sli;
             background-color: #ccb91e;
-            padding: 10px;
-          }
-          .c2SliderContainer{
-            grid-area: c2;
-            background-color: #ffb91e;
-            padding: 10px;
-          }
-          .c3SliderContainer{
-            grid-area: c3;
-            background-color: #ddb91e;
-            padding: 10px;
+            padding: 20px;
           }
           .parameterContainer {
             grid-area: par;
             background-color: #bbbbbb;
-            padding: 10px;
+            padding: 20px;
           }
-
+          .info2Container {
+            grid-area: inf2;
+            background-color: #ccb91e;
+            padding: 20px;
+            margin: 0px;
+          }
             .artCreatorGrid {
               display: grid;
               grid-template-columns: 1fr 1fr 1fr 1fr;
               grid-template-areas:
               "over over over over"
-              "can can can c1"
-              "can can can c2"
-              "can can can c3"
-              "can can can par";
+              "can can can inf1"
+              "can can can sli"
+              "can can can par"
+              "inf2 inf2 inf2 inf2";
             }
 
         </style>
-
     </head>
     <body onload="opdaterGraf()">
 
@@ -84,19 +94,23 @@
           <canvas id="koordinatsystem" width="1001" height="1001"></canvas>
         </div>
 
-        <div class="c1SliderContainer">
+        <div class="info1Container">
+          <h2>Lav dine egne kunstværker</h2>
+          <p>Her kan du udfolde dig som kunstner. Flyt på de tre skydere herunder og se hvordan dit kunstværk udvikler sig. Hvilke kombinationer af c1, c2 og c3, synes du giver de flotteste kunstværker?</p>
+        </div>
+
+        <div class="sliderContainer">
           <label for="c1Input">c1</label>
-          <input id="c1Input" type="range" min="1" max="100" value="1" step="1" oninput="opdaterGraf()">
-        </div>
-
-        <div class="c2SliderContainer">
+          <input id="c1Input" type="range" min="1" max="100" value="15" step="1" oninput="opdaterGraf()"><br>
           <label for="c2Input">c2</label>
-          <input id="c2Input" type="range" min="1" max="100" value="1" step="1" oninput="opdaterGraf()">
+          <input id="c2Input" type="range" min="1" max="100" value="91" step="1" oninput="opdaterGraf()"><br>
+          <label for="c3Input">c3</label>
+          <input id="c3Input" type="range" min="1" max="100" value="30" step="1" oninput="opdaterGraf()"><br>
         </div>
 
-        <div class="c3SliderContainer">
-          <label for="c3Input">c3</label>
-          <input id="c3Input" type="range" min="1" max="100" value="1" step="1" oninput="opdaterGraf()">
+        <div class="info2Container">
+          <h2>Gode råd</h2>
+          <p>Brug evt. tabulator-tasten til at skifte mellem markering af de tre forskellige skydere. Og brug herefter piletasterne til ændre på værdien af c1, c2 henholdsvis c3. Hvis man starter med små værdier af de tre parametre, er det lettest at kreere kunst.</p>
         </div>
 
         <div class="parameterContainer">
@@ -104,9 +118,11 @@
           <p id="visc2">c2 =</p>
           <p id="visc3">c3 =</p>
         </div>
+
       </div>
     </body>
 </html>
+
 
 <script>
   function opdaterGraf() {
