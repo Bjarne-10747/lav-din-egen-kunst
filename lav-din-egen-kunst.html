@@ -1,134 +1,159 @@
-<!doctype html>  <!-- Version 17 -->
+<!doctype html>  <!-- Version 18 -->
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Art Creator 2</title>
-
-        <style>   /* Internal CSS, sådan at kun denne HTML-fils indhold skal implementeres i WordPress */
-
+  <head>
+      <meta charset="utf-8">
+      <title>Art Creator 2</title>
+      <meta name="viewport" content="width=divice-width initial-scale=1.0">
+      <style>   /* Internal CSS, sådan at kun denne HTML-fils indhold skal implementeres i WordPress */
         body {
           margin: 0px;
           background-color: #ffb91e;
           line-height: 1.3;
         }
+        canvas {
+          background-color: #ffe09e;
+          width: 100%;
+          height: 100%;
+        }
+        h1 {
+          text-align: center;
+          font-family: Philosopher;
+          font-size: 48px;
+          line-height: 0.5;
+          color: #000000;
+        }
+        h2 {
+          text-align: left;
+          font-family: Philosopher;
+          font-size: 20px;
+          line-height: 1.0;
+          color: #000000;
+        }
+        p {
+          text-align: left;
+          font-family: Philosopher;
+          font-size: 16px;
+          line-height: 1.3;
+          color: #000000;
+        }
+        ul {
+          list-style-position: outside;
+          list-style-type:disc;
+          margin: 0;
+          padding:0;
+        }
+        ul li {
+          margin-left: 20px;
+          font-family: Philosopher;
+          font-size: 16px;
+          color: #000000;
+        }
+        #c1Input, #c2Input, #c3Input {
+          width: 70%;
+          font-family: Philosopher;
+          font-size: 26px;
+          display:inline-block;
+        }
+        #visc1, #visc2, #visc3 {
+          display: inline-block;
+          font-size: 25px;
+          line-height: 0;
+        }
+        .overskriftContainer {
+          grid-area: over;
+          position:relative;
+          padding: 0px;
+          margin: 0px;
+          background-color: #ffb91e;
+        }
+        .canvasContainer {
+          grid-area: can;
+          padding: 0px;
+          margin: 0px;
+        }
+        .info1Container {
+          grid-area: inf1;
+          background-color: #b37a00;
+          padding: 30px;
+          padding-top: 15px;
+          margin: 0px;
+        }
+        .sliderContainer{
+          grid-area: sli;
+          background-color: #ffb91e;
+          padding: 30px;
+          font-family: Philosopher;
+          font-size: 25px;
+          color: #000000;
+        }
+        .info2Container {
+          grid-area: inf2;
+          background-color: #b37a00;
+          padding: 30px;
+          padding-top: 15px;
+          margin: 0px;
+        }
+        .artCreatorGrid {  /*  Mobil visning  */
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-areas:
+          "over over"
+          "can can"
+          "sli sli"
+          "inf1 inf2";
+        }
+        @media screen and (min-width: 1400px) {  /*  Desktop visning   */
+          .artCreatorGrid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-areas:
+            "over over over over"
+            "can can can inf1"
+            "can can can sli"
+            "can can can inf2";
+          }
+        }
+      </style>
+  </head>
+  <body onload="opdaterGraf()">
+    <div class="artCreatorGrid">
 
-          canvas {
-            background-color: #ffe09e;
-            width: 100%;
-            height: 100%;
-          }
-          h1 {
-            text-align: center;
-            font-family: Philosopher;
-            font-size: 48px;
-            color: #000000;
-          }
-          h2 {
-            text-align: left;
-            font-family: Philosopher;
-            font-size: 20px;
-            color: #000000;
-          }
-          p {
-            text-align: left;
-            font-family: Philosopher;
-            font-size: 16px;
-            color: #000000;
-          }
-          ul {
-            list-style-position: outside;
-            list-style-type:disc;
-            margin: 0;
-            padding:0;
-          }
-          ul li {
-            margin-left: 20px;
-          }
-          #c1Input, #c2Input, #c3Input {
-            width: 80%;
-            font-family: Philosopher;
-            font-size: 26px;
-          }
-          .overskriftContainer {
-            grid-area: over;
-            padding: 0px;
-            margin: 0px;
-            background-color: #ffb91e;
-          }
-          .canvasContainer {
-            grid-area: can;
-            padding: 0px;
-            margin: 0px;
-          }
-          .info1Container {
-            grid-area: inf1;
-            background-color: #b37a00;
-            padding: 30px;
-            padding-top: 15px;
-            margin: 0px;
-          }
-          .sliderContainer{
-            grid-area: sli;
-            background-color: #ffb91e;
-            padding: 30px;
-            padding-top: 40px;
-          }
-          .info2Container {
-            grid-area: inf2;
-            background-color: #b37a00;
-            padding: 30px;
-            padding-top: 15px;
-            margin: 0px;
-          }
-            .artCreatorGrid {
-              display: grid;
-              grid-template-columns: 1fr 1fr 1fr 1fr;
-              grid-template-areas:
-              "over over over over"
-              "can can can inf1"
-              "can can can sli"
-              "can can can inf2";
-            }
-
-        </style>
-    </head>
-    <body onload="opdaterGraf()">
-
-      <div class="artCreatorGrid">
-
-        <div class="overskriftContainer">
-          <h1>Art Creator 2</h1>
-        </div>
-
-        <div class="canvasContainer">
-          <canvas id="koordinatsystem" width="1001" height="1001"></canvas>
-        </div>
-
-        <div class="info1Container">
-          <h2>Lav dine egne kunstværker</h2>
-          <p>Her kan du udfolde dig som kunstner. Flyt på de tre skydere herunder og se hvordan dit kunstværk udvikler sig. Hvilke kombinationer af c1, c2 og c3, synes du giver de flotteste kunstværker?</p>
-        </div>
-
-        <div class="sliderContainer">
-          <input id="c1Input" type="range" min="1" max="100" value="1" step="1" oninput="opdaterGraf()">
-          <p id="visc1">c1 =</p>
-          <input id="c2Input" type="range" min="1" max="100" value="1" step="1" oninput="opdaterGraf()">
-          <p id="visc2">c2 =</p>
-          <input id="c3Input" type="range" min="1" max="100" value="1" step="1" oninput="opdaterGraf()">
-          <p id="visc3">c3 =</p>
-        </div>
-
-        <div class="info2Container">
-          <h2>Gode råd</h2>
-          <ul>
-            <li>Brug tabulator-tasten til at skifte mellem markering af de tre forskellige skydere</li>
-            <li>Brug piletasterne til ændre på værdien af den markerede skyder</li>
-            <li>I Crome-browersen kan du højreklikke på billedet og gemme billedet på din computer</li>
-          </ul>
-        </div>
-
+      <div class="overskriftContainer">
+        <h1>Art Creator 2</h1>
       </div>
-    </body>
+
+      <div class="canvasContainer">
+        <canvas id="koordinatsystem" width="1001" height="1001"></canvas>
+      </div>
+
+      <div class="info1Container">
+        <h2>Lav dine egne kunstværker</h2>
+        <p>Her kan du udfolde dig som kunstner. Flyt på de tre skydere herunder og se hvordan dit kunstværk udvikler sig. Hvilke kombinationer af c1, c2 og c3, synes du giver de flotteste kunstværker?</p>
+      </div>
+
+      <div class="sliderContainer">
+        <label for="c1Input">c1</label>
+        <input id="c1Input" type="range" min="1" max="100" value="1" step="1" oninput="opdaterGraf()">
+        <p id="visc1">c1 =</p><br>
+        <label for="c2Input">c2</label>
+        <input id="c2Input" type="range" min="1" max="100" value="1" step="1" oninput="opdaterGraf()">
+        <p id="visc2">c2 =</p><br>
+        <label for="c3Input">c3</label>
+        <input id="c3Input" type="range" min="1" max="100" value="1" step="1" oninput="opdaterGraf()">
+        <p id="visc3">c3 =</p><br>
+      </div>
+
+      <div class="info2Container">
+        <h2>Gode råd</h2>
+        <ul>
+          <li>Start med små værdier af c1, c2 og c3. Hvis alle tre parametre er store, kan billedet let blive meget rodet.</li>
+          <li>Brug tabulator-tasten til at skifte markering af de tre forskellige skydere, og brug derefter piletasterne til ændre på værdien heraf.</li>
+          <li>I Crome-browersen kan du højreklikke på billedet og gemme det på din computer.</li>
+        </ul>
+      </div>
+
+    </div>
+  </body>
 </html>
 
 
@@ -138,9 +163,9 @@
     var c2 = document.getElementById("c2Input").value;
     var c3 = document.getElementById("c3Input").value;
 
-    document.getElementById("visc1").innerHTML = "c1 = " + c1;
-    document.getElementById("visc2").innerHTML = "c2 = " + c2;
-    document.getElementById("visc3").innerHTML = "c3 = " + c3;
+    document.getElementById("visc1").innerHTML = c1;
+    document.getElementById("visc2").innerHTML = c2;
+    document.getElementById("visc3").innerHTML = c3;
 
     var canvas = document.getElementById("koordinatsystem");
     var ctx = canvas.getContext("2d");
@@ -153,8 +178,6 @@
     var width = inddelinger+1;  // koordinatsystemets bredde i pixels
     var height = inddelinger+1;  // koordinatsystemets højde i pixels
     var lissajousIDO = ctx.createImageData (width, height);
-
-
 
     var v1 = 0;   // Cirkel 1: Vinklen mellem x-aksen og origo-centrum-linien
     var r1 = 3;   // Cirkel 1: Afstand mellem origo og cirklens centrum
@@ -201,9 +224,6 @@
 
         x = (x1a+x2a+x3a)/dxy*2 - xmin*2/dxy-1;
         y = (y1a+y2a+y3a)/dxy*2 - ymin*2/dxy-1;
-
-      //  x = x/20;
-      //  y = y/20;
 
       pixelsFraVenstre = inddelinger/2 + Math.floor(inddelinger*x/2.1+0.5);
       pixelsFraTop = inddelinger/2 - Math.floor(inddelinger*y/2.1+0.5);
