@@ -1,4 +1,4 @@
-<!doctype html>  <!-- Version 21 -->
+<!doctype html>  <!-- Version 22 -->
 <html>
   <head>
       <meta charset="utf-8">
@@ -37,7 +37,7 @@
           line-height: 1.3;
         }
         canvas {
-          background-color: #ffe09e;
+          background-color: #ffb91e;
           width: 100%;
           height: 100%;
         }
@@ -105,14 +105,14 @@
         }
         .info1Container {
           grid-area: inf1;
-          background-color: #b37a00;
+          background-color: #ffb91e;
           padding: 30px;
           padding-top: 15px;
           margin: 0px;
         }
         .sliderContainer{
           grid-area: sli;
-          background-color: #ffb91e;
+          background-color: #ffe09e;
           padding: 30px;
           font-family: Philosopher;
           font-size: 25px;
@@ -130,12 +130,12 @@
           grid-template-columns: 1fr 1fr;
           grid-template-areas:
           "over over"
+          "inf1 inf1"
           "can can"
           "sli sli"
-          "inf1 inf1"
           "inf2 inf2";
         }
-        @media screen and (min-width: 1400px) {  /*  Desktop visning   */
+        @media screen and (min-width: 1200px) {  /*  Desktop visning   */
           .artCreatorGrid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -144,6 +144,26 @@
             "can can can inf1"
             "can can can sli"
             "can can can inf2";
+          }
+          canvas {
+            background-color: #ffe09e;
+            width: 100%;
+            height: 100%;
+          }
+          .sliderContainer{
+            grid-area: sli;
+            background-color: #ffb91e;
+            padding: 30px;
+            font-family: Philosopher;
+            font-size: 25px;
+            color: #000000;
+          }
+          .info1Container {
+            grid-area: inf1;
+            background-color: #b37a00;
+            padding: 30px;
+            padding-top: 15px;
+            margin: 0px;
           }
         }
       </style>
