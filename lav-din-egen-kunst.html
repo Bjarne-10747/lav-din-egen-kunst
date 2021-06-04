@@ -1,4 +1,4 @@
-<!doctype html>  <!-- Version 19 -->
+<!doctype html>  <!-- Version 20 -->
 <html>
   <head>
       <meta charset="utf-8">
@@ -74,11 +74,14 @@
           font-size: 16px;
           color: #000000;
         }
+        #c1Label, #c2Label, #c3Label {
+          display: inline-block;
+        }
         #c1Input, #c2Input, #c3Input {
           width: 70%;
           font-family: Philosopher;
           font-size: 26px;
-          display:inline-block;
+          display: inline-block;
         }
         #visc1, #visc2, #visc3 {
           display: inline-block;
@@ -159,13 +162,13 @@
       </div>
 
       <div class="sliderContainer">
-        <label for="c1Input">c1</label>
+        <label id="c1Label" for="c1Input">c1</label>
         <input id="c1Input" type="range" min="1" max="100" value="1" step="1" oninput="opdaterGraf()">
         <p id="visc1">c1 =</p><br>
-        <label for="c2Input">c2</label>
+        <label id="c2Label" for="c2Input">c2</label>
         <input id="c2Input" type="range" min="1" max="100" value="1" step="1" oninput="opdaterGraf()">
         <p id="visc2">c2 =</p><br>
-        <label for="c3Input">c3</label>
+        <label id="c3Label" for="c3Input">c3</label>
         <input id="c3Input" type="range" min="1" max="100" value="1" step="1" oninput="opdaterGraf()">
         <p id="visc3">c3 =</p><br>
       </div>
